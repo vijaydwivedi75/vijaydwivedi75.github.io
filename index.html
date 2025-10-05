@@ -1,260 +1,637 @@
 <!DOCTYPE html>
 <html>
-	<head>
+
+<head>
 	<meta name="generator" content="Hugo 0.56.3" />
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Vijay Prakash Dwivedi - Postdoc at Stanford University</title><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Vijay Prakash Dwivedi - Postdoc at Stanford University</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 	<link rel="manifest" href="site.webmanifest">
 	<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
-	<meta name="description" content="Postdoctoral Scholar at Stanford University, Deep Learning, Graph Neural Networks, Graph Transformers, Email: vdwivedi [AT] cs.stanford.edu" />
+	<meta name="description"
+		content="Postdoctoral Scholar at Stanford University, Deep Learning, Graph Neural Networks, Graph Transformers, Large Language Models, Relational Deep Learning, Email: vdwivedi [AT] cs.stanford.edu" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="http://vijaydwivedi75.github.io/index.xml" title="Vijay Prakash Dwivedi" />
+	<link rel="alternate" type="application/rss+xml" href="http://vijaydwivedi75.github.io/index.xml"
+		title="Vijay Prakash Dwivedi" />
 	<meta property="og:title" content="Vijay Prakash Dwivedi" />
-<meta property="og:description" content="Postdoctoral Scholar at Stanford University, Deep Learning, Graph Neural Networks, Graph Transformers, Email: vdwivedi [AT] cs.stanford.edu" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://vijaydwivedi.com.np/" />
+	<meta property="og:description"
+		content="Postdoctoral Scholar at Stanford University, Deep Learning, Graph Neural Networks, Graph Transformers, Large Language Models, Relational Deep Learning, Email: vdwivedi [AT] cs.stanford.edu" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://vijaydwivedi.com.np/" />
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Vijay Prakash Dwivedi"/>
-<meta name="twitter:description" content="Postdoc at Stanford University"/>
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300" rel="stylesheet">
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Vijay Prakash Dwivedi" />
+	<meta name="twitter:description" content="Postdoc at Stanford University" />
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:500,100,300"
+		rel="stylesheet">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css" /><script src="js/feather.min.js"></script><script src="js/main.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+	<script src="js/feather.min.js"></script>
+	<script src="js/main.js"></script>
+
+	<style>
+		/* Toggle Button Styles */
+		.view-toggle {
+			position: fixed;
+			bottom: 30px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1000;
+			background: #000000;
+			border: 2px solid #ffffff;
+			border-radius: 25px;
+			padding: 8px 12px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			box-shadow: 0 4px 20px 4px rgba(0, 0, 0, 0.4);
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.view-toggle:hover {
+			box-shadow: 0 6px 30px 6px rgba(0, 0, 0, 0.6);
+			transform: translateX(-50%) translateY(-2px);
+		}
+
+		.toggle-switch {
+			position: relative;
+			width: 50px;
+			height: 24px;
+			background: #444444;
+			border-radius: 12px;
+			transition: background 0.3s ease;
+		}
+
+		.toggle-slider {
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			width: 20px;
+			height: 20px;
+			background: #ffffff;
+			border-radius: 50%;
+			transition: transform 0.3s ease;
+		}
+
+		.toggle-switch.active {
+			background: #4CAF50;
+		}
+
+		.toggle-switch.active .toggle-slider {
+			transform: translateX(26px);
+		}
+
+		.toggle-label {
+			font-family: 'Ubuntu', sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			color: #ffffff;
+			user-select: none;
+		}
+
+		/* Machine View Styles */
+		.machine-view {
+			display: none;
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 40px 20px;
+			font-family: 'Courier New', Courier, Monaco, Consolas, monospace;
+			font-size: 14px;
+			line-height: 1.7;
+			color: #c9d1d9;
+			background: #0d1117;
+			min-height: 100vh;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+
+		.machine-view.active {
+			display: block;
+			opacity: 1;
+		}
+
+		.human-view {
+			display: block;
+			opacity: 1;
+			transition: opacity 0.3s ease;
+		}
+
+		.human-view.hidden {
+			display: none;
+			opacity: 0;
+		}
+
+		/* Responsive toggle button */
+		@media (max-width: 768px) {
+			.view-toggle {
+				bottom: 20px;
+				padding: 6px 10px;
+				gap: 8px;
+			}
+
+			.toggle-label {
+				font-size: 12px;
+			}
+
+			.toggle-switch {
+				width: 44px;
+				height: 22px;
+			}
+
+			.toggle-slider {
+				width: 18px;
+				height: 18px;
+			}
+
+			.toggle-switch.active .toggle-slider {
+				transform: translateX(22px);
+			}
+		}
+	</style>
 </head>
 
 
-	<body>
-		<div class="container wrapper">
-			<div class="header">
-	<img src=https://vijaydwivedi75.github.io/profile.jpg class="profile_image">
-	<h1 class="site-title">Vijay Prakash Dwivedi</h1>
-	<div class="site-affilation">
-		<span class="affilation"><ul class="flat">
-				<li class="position">Postdoctoral Scholar, Stanford University</li>
-				<li class="email"></li>
-			</ul><ul class="flat">
-				<li class="position">Computer Science Department</li><br>
-				<li class="position">Group: <a target="_blank" href="http://snap.stanford.edu">SNAP</a>, Gates 436</li>
-				<li class="email">Email: vdwivedi [AT] cs.stanford.edu</li>
-			</ul></span>
-		
-
-		<nav class="nav social">
-			<ul class="flat"><a target="_blank" href="https://github.com/vijaydwivedi75" title="GitHub"><i data-feather="github"></i></a><a target="_blank" href="https://twitter.com/vijaypradwi" title="Twitter"><i data-feather="twitter"></i></a><a target="_blank" href="https://linkedin.com/in/vijay321/" title="LinkedIn"><i data-feather="linkedin"></i></a>
-				
-				
-			</ul>
-		</nav>
+<body>
+	<!-- Toggle Button -->
+	<div class="view-toggle" id="viewToggle" role="button" tabindex="0"
+		aria-label="Toggle between Human and Machine view">
+		<span class="toggle-label" id="toggleLabel">Human</span>
+		<div class="toggle-switch" id="toggleSwitch">
+			<div class="toggle-slider"></div>
+		</div>
 	</div>
 
-	<nav class="nav">
-		<ul class="flat">
-			
-		</ul>
-	</nav>
-</div>
+	<!-- Human View (Original Design) -->
+	<div class="human-view" id="humanView">
+		<div class="container wrapper">
+			<div class="header">
+				<img src=https://vijaydwivedi75.github.io/profile.jpg class="profile_image">
+				<h1 class="site-title">Vijay Prakash Dwivedi</h1>
+				<div class="site-affilation">
+					<span class="affilation">
+						<ul class="flat">
+							<li class="position">Postdoctoral Scholar, Stanford University</li>
+							<li class="email"></li>
+						</ul>
+						<ul class="flat">
+							<li class="position">Computer Science Department</li><br>
+							<li class="position">Group: <a target="_blank" href="http://snap.stanford.edu">SNAP</a></li>
+							<li class="email">Email: vdwivedi [AT] cs.stanford.edu</li>
+						</ul>
+					</span>
+
+
+					<nav class="nav social">
+						<ul class="flat"><a target="_blank" href="https://github.com/vijaydwivedi75" title="GitHub"><i
+									data-feather="github"></i></a><a target="_blank"
+								href="https://twitter.com/vijaypradwi" title="Twitter"><i
+									data-feather="twitter"></i></a><a target="_blank"
+								href="https://linkedin.com/in/vijay321/" title="LinkedIn"><i
+									data-feather="linkedin"></i></a>
+
+
+						</ul>
+					</nav>
+				</div>
+
+				<nav class="nav">
+					<ul class="flat">
+
+					</ul>
+				</nav>
+			</div>
 
 			<div class="introduction">
-	<span>
-		<b>Interests.</b> Machine Learning, Deep Learning on Graphs
-		<br><br>
-	</span><span>
-		I am a Postdoctoral Scholar at <a target="_blank" href="http://stanford.edu/">Stanford University</a> working
-		with <a target="_blank" href="https://profiles.stanford.edu/jure-leskovec">Jure Leskovec</a> in
-		<a target="_blank" href="https://snap.stanford.edu">SNAP</a> group on graph representation learning.<br><br>
-	</span><span>
-		Prior to this, I was an AI Researcher at <a target="_blank" href="https://aics.asus.com">ASUS Intelligent Cloud Services (AICS)</a>
-		in Singapore developing advanced AI capabilities using machine learning, large language models and multimodal deep
-		learning for healthcare applications. I completed my PhD at <a target="_blank" href="https://ntu.edu.sg">Nanyang Technological University (NTU), Singapore</a>,
-		where I was advised by <a target="_blank" href="https://tuanluu.github.io">Luu Anh Tuan</a>
-		and <a target="_blank" href="https://www.comp.nus.edu.sg/cs/people/xaviercs/">Xavier Bresson</a> and
-		received one of the <a target="_blank" href="https://www.ntu.edu.sg/computing/news-events/news/detail/ccds-outstanding-phd-thesis-award-2024">Outstanding PhD Thesis</a> Awards.
-	</span></div>
+				<span>
+					<b>Interests.</b> Machine Learning, Understanding Graphs and Structured Data, Large Language Models
+					<br><br>
+				</span><span>
+					I am a Postdoctoral Scholar at <a target="_blank" href="http://stanford.edu/">Stanford
+						University</a> working
+					with <a target="_blank" href="https://profiles.stanford.edu/jure-leskovec">Jure Leskovec</a> in
+					<a target="_blank" href="https://snap.stanford.edu">SNAP</a> group on graph representation
+					learning.<br><br>
+				</span><span>
+					Prior to this, I was an AI Researcher at <a target="_blank" href="https://aics.asus.com">ASUS
+						Intelligent Cloud Services (AICS)</a>
+					in Singapore developing advanced AI capabilities using machine learning, large language models and
+					multimodal deep
+					learning for healthcare applications. I completed my PhD at <a target="_blank"
+						href="https://ntu.edu.sg">Nanyang Technological University (NTU), Singapore</a>,
+					where I was advised by <a target="_blank" href="https://tuanluu.github.io">Luu Anh Tuan</a>
+					and <a target="_blank" href="https://www.comp.nus.edu.sg/cs/people/xaviercs/">Xavier Bresson</a> and
+					received one of the <a target="_blank"
+						href="https://www.ntu.edu.sg/computing/news-events/news/detail/ccds-outstanding-phd-thesis-award-2024">Outstanding
+						PhD Thesis</a> Awards.
+				</span>
+			</div>
 
 
 
 
 			<div class="introduction brdr">
-	<h4>Education</h4>
-	<ul>
-		<li>
-			<a target="_blank" href="http://ntu.edu.sg/" class="project"> Nanyang Technological University (NTU), Singapore</a>
+				<h4>Education</h4>
+				<ul>
+					<li>
+						<a target="_blank" href="http://ntu.edu.sg/" class="project"> Nanyang Technological University
+							(NTU), Singapore</a>
 
-			
-			
-			<span class="project_description">
-				<b>Doctor of Philosophy (PhD)</b>, <i>2019-2024</i><br>College of Computing and Data Science
-			</span>
-			
 
-		</li>
-		
-		<li>
-			<a target="_blank" href="http://mnnit.ac.in/" class="project"> Motilal Nehru National Institute of Technology (MNNIT), Allahabad</a>
 
-			
-			
-			<span class="project_description">
-				<b>Bachelor of Technology (BTech)</b>, <i>2014-2018</i><br>Department of Computer Science and Engineering
-			</span>
-			
+						<span class="project_description">
+							<b>Doctor of Philosophy (PhD)</b>, <i>2019-2024</i><br>College of Computing and Data Science
+						</span>
 
-		</li>
-		</ul>
-</div>
 
-			<div class="introduction brdr">
-	<h4>Research Experience (<a target="_blank" href="https://www.linkedin.com/in/vijay321/">LinkedIn</a>)</h4>
-	<ul>
-		
-		<li>
-			Postdoctoral Scholar, <a target="_blank" href="https://snap.stanford.edu"> Stanford University, USA</a>, <i>Nov 2024-now</i>
-		</li>
-		<li>
-			AI Researcher, <a target="_blank" href="https://aics.asus.com"> ASUS Intelligent Cloud Services (AICS), Singapore</a>, <i>Dec 2023-Oct 2024</i>
-		</li>
-		<li>
-			Research Intern, <a target="_blank" href="https://research.snap.com"> Snap Inc., Seattle, USA</a>, <i>Jun-Aug 2023</i>
-		</li>
-		<li>
-			Research Intern, <a target="_blank" href="https://sail.sea.com"> Sea AI Lab, Singapore</a>, <i>Dec 2022-May 2023</i>
-		</li>
-		<li>
-			Research Intern, <a target="_blank" href="https://www.sony.com/en/SonyInfo/research/"> Sony Group Corporation, Tokyo, Japan</a>, <i>Jun-Aug 2022</i>
-		</li>
-		
-		<li>
-			Research Assistant, <a target="_blank" href="https://www.ntu.edu.sg/computing/research/institutes-centres/micl"> Media &amp; Interactive Computing Lab, NTU Singapore</a>, <i>Feb-Jul 2019</i>
-		</li>
-		<li>
-			Solution Consultant, <a target="_blank" href="https://francium.tech/"> Francium Technologies Pvt Ltd, Chennai</a>, <i>Dec 2018-Feb 2019</i> [<a target="_blank" href="https://blog.francium.tech/object-detection-on-documents-with-mask-rcnn-on-tensorflow-c7556654c167">blog</a>]			
-		</li>
-		<li>
-			Research Intern, <a target="_blank" href="https://ltrc.iiit.ac.in/"> Language Technologies Research Center (LTRC), IIIT Hyderabad</a>, <i>May-Jul 2017</i> [<a target="_blank" href="https://github.com/vijaydwivedi75/Beyond_word2vec">code</a>]
-		</li>
-		<li>
-			Research Intern, <a target="_blank" href="https://cogbid.github.io/"> CogBID Lab, University of Stirling</a>, <i>May-Jul 2017</i>
-		</li>
-		</ul>
-</div>
+					</li>
+
+					<li>
+						<a target="_blank" href="http://mnnit.ac.in/" class="project"> Motilal Nehru National Institute
+							of Technology (MNNIT), Allahabad</a>
+
+
+
+						<span class="project_description">
+							<b>Bachelor of Technology (BTech)</b>, <i>2014-2018</i><br>Department of Computer Science
+							and Engineering
+						</span>
+
+
+					</li>
+				</ul>
+			</div>
 
 			<div class="introduction brdr">
-	<h4>Publications (<a target="_blank" href="https://scholar.google.com/citations?user=8MS7iC0AAAAJ&hl=en">Google Scholar</a>)</h4><div class="year"></div></div>
+				<h4>Research Experience (<a target="_blank" href="https://www.linkedin.com/in/vijay321/">LinkedIn</a>)
+				</h4>
+				<ul>
+
+					<li>
+						Postdoctoral Scholar, <a target="_blank" href="https://snap.stanford.edu"> Stanford University,
+							USA</a>, <i>Nov 2024-now</i>
+					</li>
+					<li>
+						AI Researcher, <a target="_blank" href="https://aics.asus.com"> ASUS Intelligent Cloud Services
+							(AICS), Singapore</a>, <i>Dec 2023-Oct 2024</i>
+					</li>
+					<li>
+						Research Intern, <a target="_blank" href="https://research.snap.com"> Snap Inc., Seattle,
+							USA</a>, <i>Jun-Aug 2023</i>
+					</li>
+					<li>
+						Research Intern, <a target="_blank" href="https://sail.sea.com"> Sea AI Lab, Singapore</a>,
+						<i>Dec 2022-May 2023</i>
+					</li>
+					<li>
+						Research Intern, <a target="_blank" href="https://www.sony.com/en/SonyInfo/research/"> Sony
+							Group Corporation, Tokyo, Japan</a>, <i>Jun-Aug 2022</i>
+					</li>
+
+					<li>
+						Research Assistant, <a target="_blank"
+							href="https://www.ntu.edu.sg/computing/research/institutes-centres/micl"> Media &amp;
+							Interactive Computing Lab, NTU Singapore</a>, <i>Feb-Jul 2019</i>
+					</li>
+					<li>
+						Solution Consultant, <a target="_blank" href="https://francium.tech/"> Francium Technologies Pvt
+							Ltd, Chennai</a>, <i>Dec 2018-Feb 2019</i> [<a target="_blank"
+							href="https://blog.francium.tech/object-detection-on-documents-with-mask-rcnn-on-tensorflow-c7556654c167">blog</a>]
+					</li>
+					<li>
+						Research Intern, <a target="_blank" href="https://ltrc.iiit.ac.in/"> Language Technologies
+							Research Center (LTRC), IIIT Hyderabad</a>, <i>May-Jul 2017</i> [<a target="_blank"
+							href="https://github.com/vijaydwivedi75/Beyond_word2vec">code</a>]
+					</li>
+					<li>
+						Research Intern, <a target="_blank" href="https://cogbid.github.io/"> CogBID Lab, University of
+							Stirling</a>, <i>May-Jul 2017</i>
+					</li>
+				</ul>
+			</div>
 
 			<div class="introduction brdr">
-	<h4>Keynotes, Talks and Tutorials</h4>
-	<ul>
-		<li>
-			Master of Computer Science (MCS) Program at Lincoln International College, Kathmandu, Nepal, <i>Feb 2024</i>
-			<span class="project_description">
-				Guest Lecture: Learning on Graphs for Artificial Intelligence<br>
-			</span>
-		</li>
-		<li>
-			ML on Graphs (MLoG) Workshop at the 16th ACM International WSDM Conference, Singapore, <i>Mar 2023</i>
-			<span class="project_description">
-				Keynote: Transformers for Graph Structured Data<br>
-			</span>
-		</li>
-		<li>
-			NTU Course MH6812: Advanced Natural Language Processing with Deep Learning, <i>Feb 2023</i>
-			<span class="project_description">
-				Guest Lecture: Introduction to Graph Neural Networks<br>
-			</span>
-		</li>
-        <li>
-			4th NAAMII Nepal Winter School in AI, Kathmandu, Nepal, <i>May 2022</i>
-			
-			<span class="project_description">
-				Introduction to GNNs<br>
-			</span>
-		</li>
-		<li>
-			3rd NAAMII Nepal Winter School in AI, Kathmandu, Nepal, <i>Dec 2021</i>
-			
-			<span class="project_description">
-				Introduction to GNNs<br>
-			</span>
-		</li>
-        <li>
-			LoGaG: Learning on Graphs and Geometry Reading Group, Virtual, <i>Nov 2021</i>
-			
-			<span class="project_description">
-				Graph Neural Networks with Learnable Structural and Positional Representations<br>
-			</span>
-            <span class="code_blog">
+				<h4>Publications (<a target="_blank"
+						href="https://scholar.google.com/citations?user=8MS7iC0AAAAJ&hl=en">Google Scholar</a>)</h4>
+				<div class="year"></div>
+			</div>
 
-				[<a target="_blank" href="https://youtu.be/fft2Q0jEWi0">Video</a>]
-				[<a target="_blank" href="https://hannes-stark.com/assets/VPDwivedi_GNN_LSPE_LoGaG_2021.pdf">Slides</a>]
-			</span>
-		</li>
-        <li>
-			4th National Workshop on Machine Learning and Data Science, Kathmandu, Nepal, <i>Sep 2021</i>
-			
-			<span class="project_description">
-				Introduction to GNNs and Application Prospects<br>
-			</span>
-		</li>
-		<li>
-			The DECAL Lab, UC Davis, <i>Apr 2021</i>
-			
-			<span class="project_description">
-				Benchmarking Graph Neural Networks<br>
-			</span>
-		</li>
-        <li>
-			NTU SCSE-GSC Student Lecture Series, <i>Mar 2021</i>
-			
-			<span class="project_description">
-				A Generalization of Transformer Networks to Graphs<br>
+			<div class="introduction brdr">
+				<h4>Keynotes, Talks and Tutorials</h4>
+				<ul>
+					<li>
+						ACM KDD 2025, Toronto, Canada,
+						<i>Aug 2025</i>
+						<span class="project_description">
+							Tutorial: Relational Deep Learning: Challenges, Foundations, and Next Generation
+							Architectures<br>
+						</span>
+						<span class="code_blog">
 
-			</span>
-			<span class="code_blog">
+							[<a target="_blank" href="https://sites.google.com/view/rdltutorial2025">Materials</a>]
+						</span>
+					</li>
+					<li>
+						Kumo.AI Virtual Workshop, Stanford, CA, USA,
+						<i>Feb 2025</i>
+						<span class="project_description">
+							Talk: Graph Transformers: What every data scientist should know<br>
+						</span>
+						<span class="code_blog">
 
-				[<a target="_blank" href="https://youtu.be/h-_HNeBmaaU?t=231">Video</a>]
-				[<a target="_blank" href="https://drive.google.com/file/d/1Vnk0hcQFofHmSHpDEZERzQ5CeqEsrj2s/view">Slides</a>]
-			</span>
-			
+							[<a target="_blank" href="https://youtu.be/wAYryx3GjLw?si=0tsIX5ppXCn3rUJ8">Video</a>]
+						</span>
+					</li>
+					<li>
+						5th NAAMII Nepal Winter School in AI, Kathmandu, Nepal, <i>Dec 2024</i>
 
-		</li>
-		</ul>
-</div>
-            <div class="introduction brdr">
-	<h4>Academic Services, Program Committee Member, Reviewer</h4>
-	<ul>
-	<li>ACL Rolling Review (ARR), 2024</li>
-	<li>AAAI Conference on Artificial Intelligence (AAAI), 2025, 2024</li>
-	<li>Learning on Graphs Conference (LoG), 2024, 2023, 2022</li>
-	<li>Neural Information Processing Systems (NeurIPS), 2024, 2023, 2022</li>
-        <li>International Conference on Learning Representations (ICLR), 2025, 2024, 2023, 2022. (<a target="_blank" href="https://iclr.cc/Conferences/2022/Reviewers">Highlighted Reviewer</a>)</li>
-	<li>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024, 2023</li>
-	<li>IEEE Transactions on Knowledge and Data Engineering (TKDE), 2023</li>
-        <li>IEEE International Conference on Robotics and Automation (ICRA), 2022</li>
-        <li>AAAI Workshop on Graphs and More Complex Structures for Learning and Reasoning (GCLR), 2022</li>
-        <li>Neural Networks, Elsevier, 2022, 2021</li>
-        <li>MLSys Workshop on Graph Neural Networks and Systems (GNNSys), 2021</li>
-        <li>ICML Workshop on Graph Representation Learning and Beyond (GRL+), 2020</li>
-	<li>Multiple NeurIPS, ICLR and ICML Workshops on graphs and geometric learning domains, 2022-now</li>
-    </ul>
-</div>
-            
-		</div>
+						<span class="project_description">
+							Lecture: Introduction to Graph Transformers<br>
+						</span>
+					</li>
+					<li>
+						Master of Computer Science (MCS) Program at Lincoln International College, Kathmandu, Nepal,
+						<i>Feb 2024</i>
+						<span class="project_description">
+							Guest Lecture: Learning on Graphs for Artificial Intelligence<br>
+						</span>
+					</li>
+					<li>
+						ML on Graphs (MLoG) Workshop at the 16th ACM International WSDM Conference, Singapore, <i>Mar
+							2023</i>
+						<span class="project_description">
+							Keynote: Transformers for Graph Structured Data<br>
+						</span>
+					</li>
+					<li>
+						NTU Course MH6812: Advanced Natural Language Processing with Deep Learning, <i>Feb 2023</i>
+						<span class="project_description">
+							Guest Lecture: Introduction to Graph Neural Networks<br>
+						</span>
+					</li>
+					<li>
+						4th NAAMII Nepal Winter School in AI, Kathmandu, Nepal, <i>May 2022</i>
+
+						<span class="project_description">
+							Introduction to GNNs<br>
+						</span>
+					</li>
+					<li>
+						3rd NAAMII Nepal Winter School in AI, Kathmandu, Nepal, <i>Dec 2021</i>
+
+						<span class="project_description">
+							Introduction to GNNs<br>
+						</span>
+					</li>
+					<li>
+						LoGaG: Learning on Graphs and Geometry Reading Group, Virtual, <i>Nov 2021</i>
+
+						<span class="project_description">
+							Graph Neural Networks with Learnable Structural and Positional Representations<br>
+						</span>
+						<span class="code_blog">
+
+							[<a target="_blank" href="https://youtu.be/fft2Q0jEWi0">Video</a>]
+							[<a target="_blank"
+								href="https://hannes-stark.com/assets/VPDwivedi_GNN_LSPE_LoGaG_2021.pdf">Slides</a>]
+						</span>
+					</li>
+					<li>
+						4th National Workshop on Machine Learning and Data Science, Kathmandu, Nepal, <i>Sep 2021</i>
+
+						<span class="project_description">
+							Introduction to GNNs and Application Prospects<br>
+						</span>
+					</li>
+					<li>
+						The DECAL Lab, UC Davis, <i>Apr 2021</i>
+
+						<span class="project_description">
+							Benchmarking Graph Neural Networks<br>
+						</span>
+					</li>
+					<li>
+						NTU SCSE-GSC Student Lecture Series, <i>Mar 2021</i>
+
+						<span class="project_description">
+							A Generalization of Transformer Networks to Graphs<br>
+
+						</span>
+						<span class="code_blog">
+
+							[<a target="_blank" href="https://youtu.be/h-_HNeBmaaU?t=231">Video</a>]
+							[<a target="_blank"
+								href="https://drive.google.com/file/d/1Vnk0hcQFofHmSHpDEZERzQ5CeqEsrj2s/view">Slides</a>]
+						</span>
+
+
+					</li>
+				</ul>
+			</div>
+			<div class="introduction brdr">
+				<h4>Academic Services, Program Committee Member, Reviewer</h4>
+				<ul>
+					<li>ACL Rolling Review (ARR), 2024</li>
+					<li>AAAI Conference on Artificial Intelligence (AAAI), 2025, 2024</li>
+					<li>Learning on Graphs Conference (LoG), 2025, 2024, 2023, 2022</li>
+					<li>Neural Information Processing Systems (NeurIPS), 2025, 2024, 2023, 2022</li>
+					<li>International Conference on Learning Representations (ICLR), 2026, 2025, 2024, 2023, 2022. (<a
+							target="_blank" href="https://iclr.cc/Conferences/2022/Reviewers">Highlighted Reviewer</a>)
+					</li>
+					<li>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024, 2023</li>
+					<li>IEEE Transactions on Knowledge and Data Engineering (TKDE), 2023</li>
+					<li>IEEE International Conference on Robotics and Automation (ICRA), 2022</li>
+					<li>AAAI Workshop on Graphs and More Complex Structures for Learning and Reasoning (GCLR), 2022</li>
+					<li>Neural Networks, Elsevier, 2022, 2021</li>
+					<li>MLSys Workshop on Graph Neural Networks and Systems (GNNSys), 2021</li>
+					<li>ICML Workshop on Graph Representation Learning and Beyond (GRL+), 2020</li>
+					<li>Multiple NeurIPS, ICLR and ICML Workshops on graphs and geometric learning domains, 2022-now
+					</li>
+				</ul>
+			</div>
+
 		</div>
 		<div class="footer wrapper">
-	<nav class="nav">
-		<div><a href="https://github.com/hadisinaee/avicenna">Avicenna Theme</a> | Built with <a href="https://gohugo.io">Hugo</a></div>
-	</nav>
-</div>
+			<nav class="nav">
+				<div><a href="https://github.com/hadisinaee/avicenna">Avicenna Theme</a> | Built with <a
+						href="https://gohugo.io">Hugo</a></div>
+			</nav>
+		</div>
+	</div>
+	</div>
 
-<script>
-	feather.replace()
+	<!-- Machine View (Plain Text Markdown) -->
+	<div class="machine-view" id="machineView">VIJAY PRAKASH DWIVEDI
+[GitHub](https://github.com/vijaydwivedi75) [Twitter](https://twitter.com/vijaypradwi) [LinkedIn](https://linkedin.com/in/vijay321/)
 
-</script>
-	</body>
+# About
+
+Postdoctoral Scholar, Stanford University
+Computer Science Department
+Group: SNAP
+Email: vdwivedi [AT] cs.stanford.edu
+
+## Interests
+
+Machine Learning, Understanding Graphs and Structured Data, Large Language Models
+
+## Bio
+
+I am a Postdoctoral Scholar at Stanford University working with Jure Leskovec in SNAP group on graph representation learning.
+
+Prior to this, I was an AI Researcher at ASUS Intelligent Cloud Services (AICS) in Singapore developing advanced AI capabilities using machine learning, large language models and multimodal deep learning for healthcare applications. I completed my PhD at Nanyang Technological University (NTU), Singapore, where I was advised by Luu Anh Tuan and Xavier Bresson and received one of the Outstanding PhD Thesis Awards.
+
+## Education
+
+### Doctor of Philosophy (PhD) - Nanyang Technological University (NTU), Singapore
+[Website](http://ntu.edu.sg/)
+Duration: 2019-2024
+College of Computing and Data Science
+
+### Bachelor of Technology (BTech) - Motilal Nehru National Institute of Technology (MNNIT), Allahabad
+[Website](http://mnnit.ac.in/)
+Duration: 2014-2018
+Department of Computer Science and Engineering
+
+## Research Experience
+
+Full Profile: [LinkedIn](https://www.linkedin.com/in/vijay321/)
+
+- Postdoctoral Scholar, [Stanford University, USA](https://snap.stanford.edu) (Nov 2024-now)
+- AI Researcher, [ASUS Intelligent Cloud Services (AICS), Singapore](https://aics.asus.com) (Dec 2023-Oct 2024)
+- Research Intern, [Snap Inc., Seattle, USA](https://research.snap.com) (Jun-Aug 2023)
+- Research Intern, [Sea AI Lab, Singapore](https://sail.sea.com) (Dec 2022-May 2023)
+- Research Intern, [Sony Group Corporation, Tokyo, Japan](https://www.sony.com/en/SonyInfo/research/) (Jun-Aug 2022)
+- Research Assistant, [Media & Interactive Computing Lab, NTU Singapore](https://www.ntu.edu.sg/computing/research/institutes-centres/micl) (Feb-Jul 2019)
+- Solution Consultant, [Francium Technologies Pvt Ltd, Chennai](https://francium.tech/) (Dec 2018-Feb 2019)
+  - [Blog Post](https://blog.francium.tech/object-detection-on-documents-with-mask-rcnn-on-tensorflow-c7556654c167)
+- Research Intern, [Language Technologies Research Center (LTRC), IIIT Hyderabad](https://ltrc.iiit.ac.in/) (May-Jul 2017)
+  - [Code Repository](https://github.com/vijaydwivedi75/Beyond_word2vec)
+- Research Intern, [CogBID Lab, University of Stirling](https://cogbid.github.io/) (May-Jul 2017)
+
+## Publications
+
+[Google Scholar Profile](https://scholar.google.com/citations?user=8MS7iC0AAAAJ&hl=en)
+
+## Keynotes, Talks and Tutorials
+
+### ACM KDD 2025, Toronto, Canada (Aug 2025)
+Tutorial: Relational Deep Learning: Challenges, Foundations, and Next Generation Architectures
+- [Materials](https://sites.google.com/view/rdltutorial2025)
+
+### Kumo.AI Virtual Workshop, Stanford, CA, USA (Feb 2025)
+Talk: Graph Transformers: What every data scientist should know
+- [Video](https://youtu.be/wAYryx3GjLw?si=0tsIX5ppXCn3rUJ8)
+
+### 5th NAAMII Nepal Winter School in AI, Kathmandu, Nepal (Dec 2024)
+Lecture: Introduction to Graph Transformers
+
+### Master of Computer Science (MCS) Program at Lincoln International College, Kathmandu, Nepal (Feb 2024)
+Guest Lecture: Learning on Graphs for Artificial Intelligence
+
+### ML on Graphs (MLoG) Workshop at the 16th ACM International WSDM Conference, Singapore (Mar 2023)
+Keynote: Transformers for Graph Structured Data
+
+### NTU Course MH6812: Advanced Natural Language Processing with Deep Learning (Feb 2023)
+Guest Lecture: Introduction to Graph Neural Networks
+
+### 4th NAAMII Nepal Winter School in AI, Kathmandu, Nepal (May 2022)
+Introduction to GNNs
+
+### 3rd NAAMII Nepal Winter School in AI, Kathmandu, Nepal (Dec 2021)
+Introduction to GNNs
+
+### LoGaG: Learning on Graphs and Geometry Reading Group, Virtual (Nov 2021)
+Graph Neural Networks with Learnable Structural and Positional Representations
+- [Video](https://youtu.be/fft2Q0jEWi0)
+- [Slides](https://hannes-stark.com/assets/VPDwivedi_GNN_LSPE_LoGaG_2021.pdf)
+
+### 4th National Workshop on Machine Learning and Data Science, Kathmandu, Nepal (Sep 2021)
+Introduction to GNNs and Application Prospects
+
+### The DECAL Lab, UC Davis (Apr 2021)
+Benchmarking Graph Neural Networks
+
+### NTU SCSE-GSC Student Lecture Series (Mar 2021)
+A Generalization of Transformer Networks to Graphs
+- [Video](https://youtu.be/h-_HNeBmaaU?t=231)
+- [Slides](https://drive.google.com/file/d/1Vnk0hcQFofHmSHpDEZERzQ5CeqEsrj2s/view)
+
+## Academic Services, Program Committee Member, Reviewer
+
+- ACL Rolling Review (ARR), 2024
+- AAAI Conference on Artificial Intelligence (AAAI), 2025, 2024
+- Learning on Graphs Conference (LoG), 2025, 2024, 2023, 2022
+- Neural Information Processing Systems (NeurIPS), 2025, 2024, 2023, 2022
+- International Conference on Learning Representations (ICLR), 2026, 2025, 2024, 2023, 2022 ([Highlighted Reviewer](https://iclr.cc/Conferences/2022/Reviewers))
+- IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2024, 2023
+- IEEE Transactions on Knowledge and Data Engineering (TKDE), 2023
+- IEEE International Conference on Robotics and Automation (ICRA), 2022
+- AAAI Workshop on Graphs and More Complex Structures for Learning and Reasoning (GCLR), 2022
+- Neural Networks, Elsevier, 2022, 2021
+- MLSys Workshop on Graph Neural Networks and Systems (GNNSys), 2021
+- ICML Workshop on Graph Representation Learning and Beyond (GRL+), 2020
+- Multiple NeurIPS, ICLR and ICML Workshops on graphs and geometric learning domains, 2022-now
+
+## Contact
+
+Email: vdwivedi [AT] cs.stanford.edu
+GitHub: https://github.com/vijaydwivedi75
+Twitter: https://twitter.com/vijaypradwi
+LinkedIn: https://linkedin.com/in/vijay321/
+Website: https://vijaydwivedi.com.np/</div>
+
+	<script>
+		feather.replace()
+
+		// Toggle functionality
+		const viewToggle = document.getElementById('viewToggle');
+		const toggleSwitch = document.getElementById('toggleSwitch');
+		const toggleLabel = document.getElementById('toggleLabel');
+		const humanView = document.getElementById('humanView');
+		const machineView = document.getElementById('machineView');
+
+		let isMachineView = false;
+
+		function toggleView() {
+			isMachineView = !isMachineView;
+
+			if (isMachineView) {
+				// Switch to Machine view
+				toggleSwitch.classList.add('active');
+				toggleLabel.textContent = 'Machine';
+				humanView.classList.add('hidden');
+				machineView.classList.add('active');
+				document.body.style.background = '#0d1117';
+			} else {
+				// Switch to Human view
+				toggleSwitch.classList.remove('active');
+				toggleLabel.textContent = 'Human';
+				humanView.classList.remove('hidden');
+				machineView.classList.remove('active');
+				document.body.style.background = '';
+			}
+		}
+
+		// Click event
+		viewToggle.addEventListener('click', toggleView);
+
+		// Keyboard accessibility (Enter or Space)
+		viewToggle.addEventListener('keydown', function (e) {
+			if (e.key === 'Enter' || e.key === ' ') {
+				e.preventDefault();
+				toggleView();
+			}
+		});
+	</script>
+</body>
 
 </html>
